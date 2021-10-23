@@ -1,44 +1,19 @@
-The most standard breakdown for training and test purposes of the Penn
-Treebank Corpus is:
+How to run the tagger:
 
-Sections 02-21 Training
-Section 23 Test
-Section 24 Development
+In command line, go to the directory where the tagger program belongs, make sure you have three files in the same directory:
 
-The other sections (00, 01, 22) are typically not used, although
-section 00 has a training/development feel to it (many papers cite
-examples from 00 files).
+1. A trainer file
+2. A test file
+3. A blank solution file named "solution.pos" (Create one if you don't have one)
 
-There are 2 possible versions of each file:
+Then, run the following command:
 
-1) file.pos -- there are two columns separated by a tab:
-   1st column: token
-   2nd column: POS tag
-   Blank lines separate sentences.
+python3 hb2385_HW3.py name_of_trainer name_of_test_file
 
-   This is the format of training files, system output, and development
-   or test files used for scoring purposes.
+The results will be stored in solution.pos.
 
-2) file.words -- one token per line, with blank lines between sentences.
-   Format of an input file for a tagging program.
 
-For HW4, we are distributing the following files:
+OOV items:
+I simply set the default probability of the word to be 1/1000 regardless of the tag, so that the result will be calculated based purely on the previous tag.
 
-WSJ_02-21.pos  -- to use as the training corpus
 
-WSJ_24.words   -- to use as your development set (for testing your system)
-
-WSJ_24.pos     -- to use to check how well your system is doing
-
-WSJ_23.words -- to run your system on.  You should produce a file in
-	     	the .pos format as your output and submit it as per the
-		submission instructions to be announced.
-
-score.py -- this is a scorer which you can use on your development corpus. The scoring command is: 
-
-python3 score.py WSJ_24.pos WSJ_24_sys.pos
-
-assuming that your system output is called WSJ_24_sys.pos
-
-This will give you an accuracy score. For further debugging and
-tuning, I suggest using the UNIX diff utility.
